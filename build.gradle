@@ -1,12 +1,11 @@
 buildscript {
     repositories {
         maven { url = 'https://maven.minecraftforge.net' }
-        maven { url = "https://repo.spongepowered.org/repository/maven-public/" }
         mavenCentral()
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
-        classpath group: "org.spongepowered", name: "mixingradle", version: "0.7-SNAPSHOT"
+        classpath 'org.spongepowered:mixingradle:0.7.+'
     }
 }
 apply plugin: 'net.minecraftforge.gradle'
@@ -16,24 +15,23 @@ apply plugin: 'org.spongepowered.mixin'
 
 mixin {
     add sourceSets.main, "bedsdontexplode.mixin-refmap.json"
+    config 'bedsdontexplode.mixin.json'
 }
 
 version = '1.0'
 group = 'io.github.jodlodi'
 archivesBaseName = 'bedsdontexplode'
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(16)
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft {
-    mappings channel: 'official', version: '1.17.1'
+    mappings channel: 'official', version: '1.18.1'
     runs {
         client {
             workingDirectory project.file('run')
             property 'forge.logging.markers', "SCAN,REGISTRIES,REGISTRYDUMP"
             property 'forge.logging.console.level', 'debug'
-            property "mixin.env.disableRefMap", "true"
-            arg "-mixin.config=bedsdontexplode.mixin.json"
 
             mods {
                 bedsdontexplode {
@@ -46,8 +44,6 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', "SCAN,REGISTRIES,REGISTRYDUMP"
             property 'forge.logging.console.level', 'debug'
-            property "mixin.env.disableRefMap", "true"
-            arg "-mixin.config=bedsdontexplode.mixin.json"
 
             mods {
                 bedsdontexplode {
@@ -60,7 +56,7 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', "SCAN,REGISTRIES,REGISTRYDUMP"
             property 'forge.logging.console.level', 'debug'
-            args '--mod', 'bedsdontexplode', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            args '--mod', 'examplemod', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
 
             mods {
                 bedsdontexplode {
@@ -78,25 +74,20 @@ repositories {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.17.1-37.0.95'
-
-    annotationProcessor 'org.spongepowered:mixin:0.8.4:processor'
+    minecraft 'net.minecraftforge:forge:1.18.1-39.0.10'
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 }
 
-// Example for how to get properties into the manifest for reading at runtime.
 jar {
     manifest {
         attributes([
                 "Specification-Title"     : "bedsdontexplode",
-                "Specification-Vendor"    : "bedsdontexplodesareus",
-                "Specification-Version"   : "1", // We are version 1 of ourselves
+                "Specification-Vendor"    : "jodlodi",
+                "Specification-Version"   : "1",
                 "Implementation-Title"    : project.name,
                 "Implementation-Version"  : project.jar.archiveVersion,
-                "Implementation-Vendor"   : "bedsdontexplodesareus",
-                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                "TweakClass": "org.spongepowered.asm.launch.MixinTweaker",
-                "TweakOrder": 0,
-                "MixinConfigs" : "bedsdontexplode.mixin.json"
+                "Implementation-Vendor"   : "jodlodi",
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
 }
