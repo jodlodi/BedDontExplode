@@ -1,7 +1,7 @@
 package io.github.jodlodi.bedsdontexplode;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -20,7 +20,7 @@ public class ASMHooks {
      * [BEFORE INVOKEVIRTUAL {@link Level#removeBlock(BlockPos, boolean)}]
      */
     public static InteractionResult cantuse(Level level, BlockPos pos, boolean flag, Player player) {
-        player.displayClientMessage(new TranslatableComponent("block.minecraft.bed.wrong"), true);
+        player.displayClientMessage(Component.translatable("block.minecraft.bed.wrong"), true);
         return InteractionResult.SUCCESS;
     }
 }
