@@ -11,8 +11,8 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.0'
-group = 'io.github.jodlodi'
+version = '1.18.2-1.0'
+group = 'io.github.jodlodi.bedsdontexplode'
 archivesBaseName = 'bedsdontexplode'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)

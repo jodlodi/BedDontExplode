@@ -1,7 +1,9 @@
 package io.github.jodlodi.bedsdontexplode;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BedBlock;
@@ -15,9 +17,10 @@ public class ASMHooks {
     /**
      * Injection Point:<br>
      * {@link BedBlock#use(BlockState, Level, BlockPos, Player, InteractionHand, BlockHitResult)}<br>
-     * [AFTER INVOKEVIRTUAL {@link Level#removeBlock(BlockPos, boolean)}]
+     * [BEFORE INVOKEVIRTUAL {@link Level#removeBlock(BlockPos, boolean)}]
      */
-    public static void cantuse() {
-        BedsDontExplode.LOGGER.error("ASM WORKS");
+    public static InteractionResult cantuse(Level level, BlockPos pos, boolean flag, Player player) {
+        player.displayClientMessage(new TranslatableComponent("block.minecraft.bed.wrong"), true);
+        return InteractionResult.SUCCESS;
     }
 }
