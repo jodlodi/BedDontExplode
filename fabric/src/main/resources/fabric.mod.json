@@ -8,8 +8,8 @@
         "${mod_author}"
     ],
     "contact": {
-        "homepage": "https://fabricmc.net/",
-        "sources": "https://github.com/FabricMC/fabric-example-mod"
+        "homepage": "https://www.curseforge.com/members/jodlodi/projects/",
+        "sources": "https://github.com/jodlodi/BedDontExplode"
     },
     "license": "${license}",
     "icon": "${mod_id}.png",
@@ -26,8 +26,8 @@
     "depends": {
         "fabricloader": ">=${fabric_loader_version}",
         "fabric-api": "*",
-        "minecraft": ">=1.20.2",
-        "java": ">=17"
+        "minecraft": ">=${minecraft_version}",
+        "java": ">=${java_version}"
     },
     "suggests": {
         "another-mod": "*"
