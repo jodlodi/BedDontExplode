@@ -19,6 +19,6 @@ public class MixinBedBlock {
     private void explodeCancel(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult result, CallbackInfoReturnable<InteractionResult> cir) {
         cir.cancel();
         player.displayClientMessage(Component.translatable("block.minecraft.bed.wrong"), true);
-        cir.setReturnValue(InteractionResult.SUCCESS);
+        cir.setReturnValue(InteractionResult.SUCCESS_SERVER);
     }
 }
